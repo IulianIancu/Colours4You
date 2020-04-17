@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.colors.you.Constants.SHARED_PREFERENCES_STORE
 import com.colors.you.R
 import com.colors.you.observe
-import com.colors.you.repository.RandomColorRepositoryImpl.Companion.SHARED_PREFERENCES_STORE
 import kotlinx.android.synthetic.main.main_fragment.*
 
 
