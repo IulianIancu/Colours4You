@@ -72,10 +72,11 @@ class MainFragment : Fragment() {
 
         background.setBackgroundColor(regularHex)
 
-        //This is jut me being extra and making it so the text should be readable even on dark colours
+        //This is jut me being extra and making it so the text should be readable even on random colours
         message.setTextColor(invertedHex)
     }
 
+    //A method for determining what the opposite color is
     private fun getInvertedColor(hexa: Int): Int {
         val hsv = FloatArray(3)
         Color.RGBToHSV(
