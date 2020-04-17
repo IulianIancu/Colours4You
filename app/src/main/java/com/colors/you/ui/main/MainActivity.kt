@@ -1,8 +1,8 @@
-package com.colors.you
+package com.colors.you.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.colors.you.ui.main.MainFragment
+import com.colors.you.R
 
 class MainActivity : AppCompatActivity() {
 
