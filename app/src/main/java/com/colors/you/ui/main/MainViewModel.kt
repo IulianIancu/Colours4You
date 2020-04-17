@@ -12,6 +12,5 @@ class MainViewModel(private val colorRepository: RandomColorRepository) : ViewMo
 
     fun getRandom() {
         colorCode.value = colorRepository.getColor()
-
     }
 }
