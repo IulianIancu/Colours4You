@@ -1,5 +1,6 @@
 package com.colors.you.ui.main
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.colors.you.R
 import com.colors.you.observe
+import com.colors.you.repository.RandomColorRepositoryImpl.Companion.SHARED_PREFERENCES_STORE
 import kotlinx.android.synthetic.main.main_fragment.*
 
 
@@ -18,8 +20,8 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private val factory = MainViewModelFactory()
-    private lateinit var viewModel: MainViewModel
+    private lateinit var factory: MainViewModelFactory
+    private val viewModel: MainViewModel by lazy { initViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +32,16 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
+        factory = MainViewModelFactory(
+            requireContext().getSharedPreferences(
+                SHARED_PREFERENCES_STORE,
+                Context.MODE_PRIVATE
+            )
+        )
     }
+
+    private fun initViewModel() =
+        ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,7 +56,7 @@ class MainFragment : Fragment() {
             observe(isLoading, ::handleLoadingsState)
             observe(colorCode, ::handleNewColor)
         }
-        viewModel.getRandom()
+        viewModel.getOldColor()
     }
 
     private fun handleLoadingsState(state: Boolean?) {
@@ -62,11 +72,11 @@ class MainFragment : Fragment() {
 
         background.setBackgroundColor(regularHex)
 
-        //This is jut me being extra and making it so the text should be readable
+        //This is jut me being extra and making it so the text should be readable even on dark colours
         message.setTextColor(invertedHex)
     }
 
-    private fun getInvertedColor(hexa: Int): Int { //hexa = "#28cb43";
+    private fun getInvertedColor(hexa: Int): Int {
         val hsv = FloatArray(3)
         Color.RGBToHSV(
             Color.red(hexa),

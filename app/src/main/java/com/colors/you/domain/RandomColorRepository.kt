@@ -2,5 +2,6 @@ package com.colors.you.domain
 
 interface RandomColorRepository {
 
-    fun getColor():String
+    fun getNewColor(): String
+    fun getColor(): String
 }

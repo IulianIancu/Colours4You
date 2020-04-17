@@ -10,7 +10,11 @@ class MainViewModel(private val colorRepository: RandomColorRepository) : ViewMo
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val colorCode: MutableLiveData<String> = MutableLiveData()
 
-    fun getRandom() {
+    fun getOldColor() {
         colorCode.value = colorRepository.getColor()
+    }
+
+    fun getRandom() {
+        colorCode.value = colorRepository.getNewColor()
     }
 }
