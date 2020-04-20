@@ -1,8 +1,15 @@
 package com.colors.you.domain
 
-class GetOldOrNewColorUseCase(private val randomColorRepository: RandomColorRepository) {
+class GetOldOrNewColorUseCase(
+    private val randomColorRepository: RandomColorRepository,
+    private val cacheRepository: CacheRepository
+) {
 
     fun run(): String {
-        return randomColorRepository.getColor()
+        cacheRepository.getColor()?.let { return it }
+
+        val newColor = randomColorRepository.getNewColor()
+        cacheRepository.saveColor(newColor)
+        return newColor
     }
 }

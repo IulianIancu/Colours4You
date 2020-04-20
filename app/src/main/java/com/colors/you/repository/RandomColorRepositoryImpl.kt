@@ -1,20 +1,9 @@
 package com.colors.you.repository
 
-import android.content.SharedPreferences
-import com.colors.you.Constants.COLOR_ID
 import com.colors.you.domain.RandomColorRepository
-import com.colors.you.use
-import java.lang.IllegalArgumentException
 import kotlin.random.Random
 
-class RandomColorRepositoryImpl(
-    private val sharedPreferences: SharedPreferences
-) : RandomColorRepository {
-
-    override fun getColor(): String {
-        return sharedPreferences.getString(COLOR_ID, null)?.takeIf { it.isNotBlank() }
-            ?: getNewColor()
-    }
+class RandomColorRepositoryImpl : RandomColorRepository {
 
     override fun getNewColor(): String {
         var result = "#"
@@ -33,9 +22,6 @@ class RandomColorRepositoryImpl(
                     }
                 }
             )
-        }
-        sharedPreferences.use {
-            putString(COLOR_ID, result)
         }
         return result
     }

@@ -2,9 +2,12 @@ package com.colors.you
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.colors.you.domain.CacheRepository
 import com.colors.you.domain.RandomColorRepository
+import com.colors.you.repository.CacheRepositoryImpl
 import com.colors.you.repository.RandomColorRepositoryImpl
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Before
@@ -21,15 +24,13 @@ class NewColorHexTest {
 
     private val sharedPreferences: SharedPreferences = mock()
     private val sharedPreferencesEditor: SharedPreferences.Editor = mock()
-    private lateinit var colorRepository: RandomColorRepository
+    private  val colorRepository: RandomColorRepository = RandomColorRepositoryImpl()
+    private lateinit var cacheRepository: CacheRepository
 
     @Before
     fun before() {
-        whenever(sharedPreferences.getString(any(), any())).thenReturn(TEST_HEX)
-        whenever(sharedPreferences.edit()).thenReturn(sharedPreferencesEditor)
-
-        colorRepository = RandomColorRepositoryImpl(sharedPreferences)
-
+        whenever(sharedPreferences.getString(any(), anyOrNull())).thenReturn(TEST_HEX)
+        cacheRepository = CacheRepositoryImpl(sharedPreferences)
     }
 
     @Test
@@ -41,7 +42,7 @@ class NewColorHexTest {
 
     @Test
     fun getOldColor() {
-        val color = colorRepository.getColor()
+        val color = cacheRepository.getColor()
         assert(color == TEST_HEX)
     }
 }
