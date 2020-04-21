@@ -7,7 +7,7 @@ class GetNewNameUseCase(
     private val cacheRepository: CacheRepository
 ) {
 
-    fun run(): Either<Throwable, String> {
+    suspend fun run(): Either<Throwable, String> {
         val name = randomNameRepository.getNewName()
         name.either({
             //Do something with the error if you'd like

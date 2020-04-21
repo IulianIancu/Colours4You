@@ -1,15 +1,11 @@
 package com.colors.you
 
-import android.content.Context
 import android.content.SharedPreferences
 import com.colors.you.domain.CacheRepository
 import com.colors.you.domain.RandomColorRepository
 import com.colors.you.repository.CacheRepositoryImpl
 import com.colors.you.repository.RandomColorRepositoryImpl
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.anyOrNull
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,8 +19,7 @@ class NewColorHexTest {
     }
 
     private val sharedPreferences: SharedPreferences = mock()
-    private val sharedPreferencesEditor: SharedPreferences.Editor = mock()
-    private  val colorRepository: RandomColorRepository = RandomColorRepositoryImpl()
+    private val colorRepository: RandomColorRepository = RandomColorRepositoryImpl()
     private lateinit var cacheRepository: CacheRepository
 
     @Before

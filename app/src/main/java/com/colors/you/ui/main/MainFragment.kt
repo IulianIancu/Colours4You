@@ -39,7 +39,7 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        //TODO everything in this method should go away once we implement Dagger2
         val service = Retrofit.Builder()
             .baseUrl(NAME_GENERATOR_URL)
             .addConverterFactory(GsonConverterFactory.create())
