@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Colours for you</string>
+    <string name="colours_for_you">Colours for you!</string>
+    <string name="refresh">Refresh!</string>
 </resources>
