@@ -23,10 +23,12 @@ class CacheRepositoryImpl(
     }
 
     override fun saveName(name: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        sharedPreferences.use {
+            putString(Constants.NAME_ID, name)
+        }
     }
 
     override fun getName(): String? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return sharedPreferences.getString(Constants.NAME_ID, null)?.takeIf { it.isNotBlank() }
     }
 }

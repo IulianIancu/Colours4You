@@ -2,6 +2,7 @@ package com.colors.you
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -23,5 +24,17 @@ inline fun SharedPreferences.use(
     } else {
         editor.apply()
     }
+}
+
+fun View.visible() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.gone() {
+    this.visibility = View.GONE
+}
+
+fun View.invisible() {
+    this.visibility = View.INVISIBLE
 }
 
